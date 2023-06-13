@@ -8,7 +8,17 @@ const tours = JSON.parse(
   fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
 );
 
-app.get('/api/v1/tours/:id', (req, res) => {
+const getAllTours = (req, res) => {
+  res.status(200).json({
+    status: 'success',
+    results: tours.length,
+    data: {
+      tours
+    }
+  });
+};
+
+const getTour = (req, res) => {
   console.log(req.params);
 
   const id = req.params.id * 1;
@@ -27,18 +37,9 @@ app.get('/api/v1/tours/:id', (req, res) => {
       tour
     }
   });
-});
-app.get('/api/v1/tours', (req, res) => {
-  res.status(200).json({
-    status: 'success',
-    results: tours.length,
-    data: {
-      tours
-    }
-  });
-});
+};
 
-app.post('/api/v1/tours', (req, res) => {
+const createTour = (req, res) => {
   const newId = tours[tours.length - 1].id + 1;
   const newTour = { id: newId, ...req.body };
   tours.push(newTour);
@@ -54,8 +55,18 @@ app.post('/api/v1/tours', (req, res) => {
       });
     }
   );
-  // res.send('Done');
-});
+};
+
+// app.get('/api/v1/tours/:id', getTour);
+// app.get('/api/v1/tours', getAllTours);
+// app.post('/api/v1/tours', createTour);
+
+app
+  .route('/api/v1/tours')
+  .get(getAllTours)
+  .post(createTour);
+
+app.route('/api/v1/tours/:id').get(getTour);
 
 const port = 3000;
 
