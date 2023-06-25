@@ -1,9 +1,44 @@
+const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
 dotenv.config({
   path: './config.env'
 });
+
 const app = require('./app');
+
+const DB = process.env.DATABASE.replace(
+  '<PASSWORD>',
+  process.env.DATABASE_PASSWORD
+);
+
+mongoose
+  .connect(DB, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+  })
+  .then(() => {
+    console.log('Successfully connected to database');
+  });
+
+const tourSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  rating: {
+    type: String,
+    default: 4.5
+  },
+  price: {
+    type: Number,
+    required: true
+  }
+});
+
+const Tour = mongoose.model('Tour', tourSchema)
 
 const port = process.env.PORT || 3000;
 
