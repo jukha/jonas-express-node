@@ -8,14 +8,14 @@ exports.getAllTours = async (req, res) => {
     const excludedFields = ['page', 'limit', 'sort', 'fields'];
     excludedFields.forEach(field => delete queryObj[field]);
 
-    // Advanced filtering
+    // 1) Advanced filtering
     let queryStr = JSON.stringify(queryObj);
     queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
 
     // Method 1 of writing Database query
     let query = Tour.find(JSON.parse(queryStr));
 
-    // Sorting
+    // 2) Sorting
     if (req.query.sort) {
       const sortBy = req.query.sort.split(',').join(' ');
       query = query.sort(sortBy); // sort('price ratingsAverage')
@@ -23,13 +23,27 @@ exports.getAllTours = async (req, res) => {
       query = query.sort('-createdAt');
     }
 
-    // Field Limiting
+    // 3) Field Limiting
     if (req.query.fields) {
       const fields = req.query.fields.split(',').join(' ');
       // Projection (operation of selecting specific field names)
       query = query.select(fields);
     } else {
       query = query.select('-__v'); // - here means exclude the field __v
+    }
+
+    // 4) Pagination
+    const page = req.query.page * 1 || 1;
+    const limit = req.query.limit * 1 || 100;
+    const skip = page * limit - limit;
+
+    query = query.skip(skip).limit(limit);
+
+    if (req.query.page) {
+      const numTours = await Tour.countDocuments();
+      if (skip >= numTours) {
+        throw new Error('This page does not exist');
+      }
     }
 
     // Method 2 of writing Database query
