@@ -13,7 +13,15 @@ exports.getAllTours = async (req, res) => {
     queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
 
     // Method 1 of writing Database query
-    const query = Tour.find(JSON.parse(queryStr));
+    let query = Tour.find(JSON.parse(queryStr));
+
+    // Sorting
+    if (req.query.sort) {
+      const sortBy = req.query.sort.split(',').join(' ');
+      query = query.sort(sortBy); // sort('price ratingsAverage')
+    } else {
+      query = query.sort('-createdAt');
+    }
 
     // Method 2 of writing Database query
     // const query =  Tour.find()
