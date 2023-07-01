@@ -70,7 +70,7 @@ tourSchema.virtual('durationWeeks').get(function() {
   return (this.duration / 7).toFixed(2);
 });
 
-// DOCUMENT MIDDLEWARE: runs before .save() and .create()
+// 1) DOCUMENT MIDDLEWARE: runs before .save() and .create()
 // this in document middelware refers to the document that is being processed
 // PRE Hook
 tourSchema.pre('save', function(next) {
@@ -84,7 +84,7 @@ tourSchema.pre('save', function(next) {
 //   next();
 // });
 
-// QUERY MIDDLEWARE: allows us to run functions before or after a certain query is executed
+// 2) QUERY MIDDLEWARE: allows us to run functions before or after a certain query is executed
 // this in query middelware refers to query object
 // PRE Hook
 tourSchema.pre(/^find/, function(next) {
@@ -96,6 +96,14 @@ tourSchema.pre(/^find/, function(next) {
 // POST Hook
 tourSchema.post(/^find/, function(docs, next) {
   console.log(`Query took ${Date.now() - this.start} milliseconds`);
+  next();
+});
+
+// 3) AGGREGATION MIDDLEWARE
+tourSchema.pre('aggregate', function(next) {
+  this.pipeline().unshift({
+    $match: { secretTour: { $ne: true } }
+  });
   next();
 });
 

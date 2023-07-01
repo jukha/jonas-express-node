@@ -19,10 +19,12 @@ mongoose
     useFindAndModify: false
   })
   .then(() => {
-    console.log('Successfully connected to database');
+    console.log(`
+    ============================
+    DB connection successful 🚀
+    ============================
+    `);
   });
-
-
 
 const port = process.env.PORT || 3000;
 
