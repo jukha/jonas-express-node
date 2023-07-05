@@ -1,5 +1,6 @@
 const moongose = require('mongoose');
 const validator = require('validator');
+const bcrypt = require('bcryptjs');
 
 const userSchema = new moongose.Schema({
   name: {
@@ -21,8 +22,25 @@ const userSchema = new moongose.Schema({
   },
   passwordConfirm: {
     type: String,
-    required: [true, 'Please confirm your password']
+    required: [true, 'Please confirm your password'],
+    // This only works on CREATE and SAVE
+    validate: {
+      validator: function(el) {
+        return el === this.password;
+      },
+      message: 'Passwords do not match'
+    }
   }
+});
+
+userSchema.pre('save', async function(next) {
+  // only run this function if password was actually modified
+  if (!this.isModified('password')) return next();
+
+  // Hash(encrypt) the password with cost of 12
+  this.password = await bcrypt.hash(this.password, 12);
+  this.passwordConfirm = undefined;
+  next();
 });
 
 const User = moongose.model('User', userSchema);
