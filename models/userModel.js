@@ -31,7 +31,8 @@ const userSchema = new moongose.Schema({
       },
       message: 'Passwords do not match'
     }
-  }
+  },
+  passwordChangedAt: Date
 });
 
 userSchema.pre('save', async function(next) {
@@ -44,12 +45,24 @@ userSchema.pre('save', async function(next) {
   next();
 });
 
-// This is instance method: A method that is going to be available on all documents of a certain collection
+// This is an instance method: A method that is going to be available on all documents of a certain collection
 userSchema.methods.correctPassword = async function(
   candidatePassword,
   userPassword
 ) {
   return await bcrypt.compare(candidatePassword, userPassword);
+};
+
+// Another intance method
+userSchema.methods.changedPasswordAfter = function(JWTTimestamp) {
+  if (this.passwordChangedAt) {
+    const changedTimestamp = parseInt(
+      this.passwordChangedAt.getTime() / 1000,
+      10
+    );
+    return JWTTimestamp < changedTimestamp;
+  }
+  return false;
 };
 
 const User = moongose.model('User', userSchema);
