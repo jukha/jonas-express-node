@@ -80,6 +80,7 @@ exports.protect = catchAsync(async (req, res, next) => {
   }
 
   // 4) Check if user has changed password after the token was issued
+  // This case deals with the scenario where a user (or potentially a malicious user who gains access to a verified user token) attempts to access a protected route using an outdated token. As the password change triggers the issuance of a new token, we should throw an error.
   if (currentUser.changedPasswordAfter(decoded.iat)) {
     return next(
       new AppError('User recently changed password! Please log in again.', 401)
