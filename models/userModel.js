@@ -53,6 +53,13 @@ userSchema.pre('save', async function(next) {
   next();
 });
 
+userSchema.pre('save', function(next) {
+  if (!this.isModified('password') || this.isNew) return next();
+  // Here 1s is subtracted just to make sure the JWT is always created after the password gets changed.
+  this.passwordChangedAt = Date.now() - 1000;
+  next();
+});
+
 // This is an instance method: A method that is going to be available on all documents of a certain collection
 userSchema.methods.correctPassword = async function(
   candidatePassword,
