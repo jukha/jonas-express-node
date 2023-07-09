@@ -66,7 +66,6 @@ exports.protect = catchAsync(async (req, res, next) => {
   }
   // 2) Token Verfication
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-  console.log(decoded);
 
   // 3) Check if user exists
   const currentUser = await User.findById(decoded.id);
@@ -91,3 +90,18 @@ exports.protect = catchAsync(async (req, res, next) => {
   req.user = currentUser;
   next();
 });
+
+exports.restrictTo = (...roles) => {
+  console.log('inside restrictTo');
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      return next(
+        new AppError(
+          'You do not have the permission to perform this action.',
+          403
+        )
+      );
+    }
+    next();
+  };
+};
