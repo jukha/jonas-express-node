@@ -111,31 +111,57 @@
 			"name": "Users",
 			"item": [
 				{
-					"name": "Add User",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.environment.set(\"jwt\", pm.response.json().token);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
+					"name": "Get All Users",
 					"request": {
-						"method": "POST",
+						"method": "GET",
+						"header": [],
+						"url": "{{URL}}api/v1/users"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Current User Data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{jwt}}"
+							}
+						},
+						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"M Umar\",\r\n    \"email\": \"umar@gmail.com\",\r\n    \"password\": \"secret1234\",\r\n    \"passwordConfirm\": \"secret1234\"\r\n}",
+							"raw": "{\r\n    \"name\": \"updatedNmae\",\r\n    \"role\": \"amdin\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "{{URL}}api/v1/users/signup"
+						"url": "{{URL}}api/v1/users/updateMe"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Current User",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Reset Password",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": "{{URL}}api/v1/users/resetPassword/120949042"
 					},
 					"response": []
 				},
@@ -163,7 +189,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"umar@gmail.com\",\r\n    \"password\":\"secret1234\"\r\n}",
+							"raw": "{\r\n    \"email\": \"\",\r\n    \"password\":\"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -175,11 +201,84 @@
 					"response": []
 				},
 				{
-					"name": "Get All Users",
+					"name": "Forgot Password",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
-						"url": "{{URL}}api/v1/tours"
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}api/v1/users/forgotPassword"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Current User Password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"jwt\", pm.response.json().token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{jwt}}"
+							}
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"passwordCurrent\": \"secret-1234\",\r\n    \"password\":\"secret-5678\",\r\n    \"passwordConfirm\":\"secret-5678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}api/v1/users/updateMyPassword"
+					},
+					"response": []
+				},
+				{
+					"name": "Sign Up",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"jwt\", pm.response.json().token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"\",\r\n    \"email\": \"\",\r\n    \"password\": \"\",\r\n    \"passwordConfirm\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}api/v1/users/signup"
 					},
 					"response": []
 				}
