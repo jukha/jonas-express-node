@@ -48,7 +48,8 @@ app.use(
       'ratingsAverage',
       'maxGroupSize',
       'difficulty',
-      'price'
+      'pricegit pull origin main
+      '
     ]
   })
 );
