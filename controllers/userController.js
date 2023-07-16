@@ -61,7 +61,6 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
 });
 
 exports.createUser = (req, res) => {
-  console.log('body object', req.body);
   res.status(500).json({
     status: 'error',
     message: 'This route is not defined yet!'
