@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const slugify = require('slugify');
 // const validator = require('validator');
+// const User = require('./userModel');
 
 const tourSchema = new mongoose.Schema(
   {
@@ -101,6 +102,16 @@ const tourSchema = new mongoose.Schema(
         description: String,
         day: Number
       }
+    ],
+    // For Embedding
+    // guides: Array
+
+    // For Referencing
+    guides: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User'
+      }
     ]
   },
   {
@@ -114,13 +125,19 @@ tourSchema.virtual('durationWeeks').get(function() {
 });
 
 // 1) DOCUMENT MIDDLEWARE: runs before .save() and .create()
-// this in document middelware refers to the document that is being processed
+// 'this' in document middelware refers to the document that is being processed
 // PRE Hook
 tourSchema.pre('save', function(next) {
   this.slug = slugify(this.name, { lower: true });
   next();
 });
 
+// Embedding example
+// tourSchema.pre('save', async function(next) {
+//   const guidesPromises = this.guides.map(async id => await User.findById(id));
+//   this.guides = await Promise.all(guidesPromises);
+//   next();
+// });
 // POST Hook for refernce
 // tourSchema.post('save', function(doc, next) {
 //   console.log(`Doc after .save() looks like: ${doc}`);
