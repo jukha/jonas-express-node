@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const slugify = require('slugify');
 // const validator = require('validator');
-// const User = require('./userModel');
 
 const tourSchema = new mongoose.Schema(
   {
@@ -124,6 +123,13 @@ tourSchema.virtual('durationWeeks').get(function() {
   return (this.duration / 7).toFixed(2);
 });
 
+// Virtual Populate (Same like child referencing but here data is actually not persisted into the DB)
+tourSchema.virtual('reviews', {
+  ref: 'Review',
+  localField: '_id',
+  foreignField: 'tour'
+});
+
 // 1) DOCUMENT MIDDLEWARE: runs before .save() and .create()
 // 'this' in document middelware refers to the document that is being processed
 // PRE Hook
@@ -160,6 +166,13 @@ tourSchema.pre(/^find/, function(next) {
   });
   next();
 });
+
+// tourSchema.pre('findById', function(next) {
+//   this.populate({
+//     path: 'reviews'
+//   });
+//   next();
+// });
 
 // POST Hook
 tourSchema.post(/^find/, function(docs, next) {
