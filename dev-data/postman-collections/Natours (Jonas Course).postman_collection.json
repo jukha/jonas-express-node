@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "c78afec8-4055-401d-b920-a340947ef6ef",
+		"_postman_id": "fea34339-11ee-46a5-a1f0-670246ee705f",
 		"name": "Natours (Jonas Course)",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
-		"_exporter_id": "23136892"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28581423"
 	},
 	"item": [
 		{
@@ -14,13 +14,26 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{jwt}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{URL}}api/v1/tours"
+						"url": {
+							"raw": "{{URL}}api/v1/tours",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"tours"
+							]
+						}
 					},
 					"response": []
 				},
@@ -38,7 +51,16 @@
 								}
 							}
 						},
-						"url": "{{URL}}api/v1/tours"
+						"url": {
+							"raw": "{{URL}}api/v1/tours",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"tours"
+							]
+						}
 					},
 					"response": []
 				},
@@ -47,7 +69,17 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{URL}}api/v1/tours/64a00a292f4b3f3d30411131"
+						"url": {
+							"raw": "{{URL}}api/v1/tours/64a00a292f4b3f3d30411131",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"tours",
+								"64a00a292f4b3f3d30411131"
+							]
+						}
 					},
 					"response": []
 				},
@@ -65,7 +97,17 @@
 								}
 							}
 						},
-						"url": "{{URL}}api/v1/tours/64a00b662b56c3380c19090e"
+						"url": {
+							"raw": "{{URL}}api/v1/tours/64a00b662b56c3380c19090e",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"tours",
+								"64a00b662b56c3380c19090e"
+							]
+						}
 					},
 					"response": []
 				},
@@ -74,7 +116,16 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": "{{URL}}api/v1/tours"
+						"url": {
+							"raw": "{{URL}}api/v1/tours",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"tours"
+							]
+						}
 					},
 					"response": []
 				},
@@ -83,7 +134,17 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{URL}}api/v1/tours/top-5-cheap"
+						"url": {
+							"raw": "{{URL}}api/v1/tours/top-5-cheap",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"tours",
+								"top-5-cheap"
+							]
+						}
 					},
 					"response": []
 				},
@@ -92,7 +153,17 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{URL}}api/v1/tours/tour-stats"
+						"url": {
+							"raw": "{{URL}}api/v1/tours/tour-stats",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"tours",
+								"tour-stats"
+							]
+						}
 					},
 					"response": []
 				},
@@ -101,7 +172,18 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{URL}}api/v1/tours/monthly-plan/2021"
+						"url": {
+							"raw": "{{URL}}api/v1/tours/monthly-plan/2021",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"tours",
+								"monthly-plan",
+								"2021"
+							]
+						}
 					},
 					"response": []
 				}
@@ -115,7 +197,16 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{URL}}api/v1/users"
+						"url": {
+							"raw": "{{URL}}api/v1/users",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"users"
+							]
+						}
 					},
 					"response": []
 				},
@@ -124,9 +215,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{jwt}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PATCH",
 						"header": [],
@@ -139,15 +234,140 @@
 								}
 							}
 						},
-						"url": "{{URL}}api/v1/users/updateMe"
+						"url": {
+							"raw": "{{URL}}api/v1/users/updateMe",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"updateMe"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "Delete Current User",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/v1/users/deleteMe",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"deleteMe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Current User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
-						"header": []
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}api/v1/users/me",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User (Admin)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/v1/users/64b578f812383501559bf3bf",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"64b578f812383501559bf3bf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User (Admin)",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Update by admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/v1/users/64acee828171e40146578599",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"64acee828171e40146578599"
+							]
+						}
 					},
 					"response": []
 				}
@@ -161,7 +381,18 @@
 					"request": {
 						"method": "PATCH",
 						"header": [],
-						"url": "{{URL}}api/v1/users/resetPassword/120949042"
+						"url": {
+							"raw": "{{URL}}api/v1/users/resetPassword/120949042",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"resetPassword",
+								"120949042"
+							]
+						}
 					},
 					"response": []
 				},
@@ -181,22 +412,36 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{jwt}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"\",\r\n    \"password\":\"\"\r\n}",
+							"raw": "{\r\n    \"email\": \"user@gmail.com\",\r\n    \"password\":\"user@gmail.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "{{URL}}api/v1/users/login"
+						"url": {
+							"raw": "{{URL}}api/v1/users/login",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"login"
+							]
+						}
 					},
 					"response": []
 				},
@@ -214,7 +459,17 @@
 								}
 							}
 						},
-						"url": "{{URL}}api/v1/users/forgotPassword"
+						"url": {
+							"raw": "{{URL}}api/v1/users/forgotPassword",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"forgotPassword"
+							]
+						}
 					},
 					"response": []
 				},
@@ -234,9 +489,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{jwt}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PATCH",
 						"header": [],
@@ -249,7 +508,17 @@
 								}
 							}
 						},
-						"url": "{{URL}}api/v1/users/updateMyPassword"
+						"url": {
+							"raw": "{{URL}}api/v1/users/updateMyPassword",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"updateMyPassword"
+							]
+						}
 					},
 					"response": []
 				},
@@ -271,14 +540,186 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"\",\r\n    \"email\": \"\",\r\n    \"password\": \"\",\r\n    \"passwordConfirm\": \"\"\r\n}",
+							"raw": "{\r\n    \"name\": \"I will be delete soon\",\r\n    \"email\": \"delete@delete.com\",\r\n    \"password\": \"delete@delete.com\",\r\n    \"passwordConfirm\": \"delete@delete.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "{{URL}}api/v1/users/signup"
+						"url": {
+							"raw": "{{URL}}api/v1/users/signup",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reviews",
+			"item": [
+				{
+					"name": "Delete A Review",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/v1/reviews/64b576843ceb29011cb31b4b",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"reviews",
+								"64b576843ceb29011cb31b4b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Review",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/v1/reviews/64b4d735ec5e1d0ac7a25bb3",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"reviews",
+								"64b4d735ec5e1d0ac7a25bb3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create A Review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"review\": \"Very great tour\",\r\n    \"rating\": 5,\r\n    \"tour\": \"64b3b0270f61ad03e33b6f55\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/v1/reviews",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Reviews",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/v1/reviews",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tours/Reviews (Nested)",
+			"item": [
+				{
+					"name": "Get Tour Reviews",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/v1/tours/64b3b0270f61ad03e33b6f55/reviews",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"tours",
+								"64b3b0270f61ad03e33b6f55",
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Review on Tour",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"review\": \"another good review\",\r\n    \"rating\":5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/v1/tours/64b3b0270f61ad03e33b6f55/reviews",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"tours",
+								"64b3b0270f61ad03e33b6f55",
+								"reviews"
+							]
+						}
 					},
 					"response": []
 				}

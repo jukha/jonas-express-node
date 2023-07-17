@@ -70,7 +70,7 @@ app.use('/api/v1/reviews', reviewRouter);
 
 // Handling undefined routes
 app.all('*', (req, res, next) => {
-  // Whenver we pass anything into next express will assume there is an error and it will skip all the other middleware in the middlewares stack and will sent the error to the global error handling middleware
+  // Whenver we pass anything into next, express will assume there is an error and it will skip all the other middleware in the middlewares stack and will sent the error to the global error handling middleware
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 
