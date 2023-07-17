@@ -8,6 +8,7 @@ const router = express.Router();
 // Param Middleware that will run for the route where id will be sent by the client
 // router.param('id', tourController.checkId);
 
+// Nested route
 router.use('/:tourId/reviews', reviewRouter);
 
 router
