@@ -73,10 +73,6 @@ exports.getUser = (req, res) => {
     message: 'This route is not defined yet!'
   });
 };
-exports.updateUser = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    message: 'This route is not defined yet!'
-  });
-};
+// Do NOT update password with this. As in updateOne we are using 'findByIdAndUpdate' which doesn't run the save middleware and we don't want that as we have important password related functionality inside save middlewares
+exports.updateUser = factory.updateOne(User);
 exports.deleteUser = factory.deleteOne(User);
