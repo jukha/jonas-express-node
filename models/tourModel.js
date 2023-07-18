@@ -123,6 +123,10 @@ tourSchema.virtual('durationWeeks').get(function() {
   return (this.duration / 7).toFixed(2);
 });
 
+// INDEXING
+tourSchema.index({ price: 1, ratingsAverage: -1 });
+tourSchema.index({ slug: 1 });
+
 // Virtual Populate (Same like child referencing but here data is actually not persisted into the DB)
 tourSchema.virtual('reviews', {
   ref: 'Review',
