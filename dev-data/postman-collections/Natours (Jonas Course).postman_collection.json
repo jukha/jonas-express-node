@@ -38,8 +38,18 @@
 					"response": []
 				},
 				{
-					"name": "Creat New Tour",
+					"name": "Create Tour",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -65,7 +75,7 @@
 					"response": []
 				},
 				{
-					"name": "Get Single Tour",
+					"name": "Get Tour",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -86,6 +96,16 @@
 				{
 					"name": "Update Tour",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PATCH",
 						"header": [],
 						"body": {
@@ -114,6 +134,16 @@
 				{
 					"name": "Delete Tour",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
@@ -170,6 +200,16 @@
 				{
 					"name": "Get No. of Tours Per Month Yearly",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -195,6 +235,16 @@
 				{
 					"name": "Get All Users",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -327,6 +377,16 @@
 				{
 					"name": "Delete User (Admin)",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
@@ -346,6 +406,16 @@
 				{
 					"name": "Update User (Admin)",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PATCH",
 						"header": [],
 						"body": {
@@ -411,14 +481,7 @@
 					],
 					"request": {
 						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwt}}",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "POST",
 						"header": [],
@@ -567,7 +630,7 @@
 			"name": "Reviews",
 			"item": [
 				{
-					"name": "Delete A Review",
+					"name": "Delete Review",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -588,6 +651,16 @@
 				{
 					"name": "Get Review",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -605,7 +678,7 @@
 					"response": []
 				},
 				{
-					"name": "Create A Review",
+					"name": "Create Review",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -644,6 +717,16 @@
 				{
 					"name": "Get All Reviews",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -658,6 +741,44 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Update Review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"review\": \"really bad tour\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/v1/reviews/64b4d735ec5e1d0ac7a25bb3",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"reviews",
+								"64b4d735ec5e1d0ac7a25bb3"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -665,8 +786,18 @@
 			"name": "Tours/Reviews (Nested)",
 			"item": [
 				{
-					"name": "Get Tour Reviews",
+					"name": "Get All Reviews on Tour",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
