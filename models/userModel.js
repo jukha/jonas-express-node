@@ -60,7 +60,7 @@ userSchema.pre('save', async function(next) {
 
 userSchema.pre('save', function(next) {
   if (!this.isModified('password') || this.isNew) return next();
-  // Here 1s is subtracted just to make sure the JWT is always created after the password gets changed.
+  // Here 1sec is subtracted just to make sure the JWT is always created after the password gets changed.
   this.passwordChangedAt = Date.now() - 1000;
   next();
 });
