@@ -80,6 +80,7 @@ reviewSchema.post('save', function() {
   this.constructor.calcAvgRatings(this.tour);
 });
 
+// Mongoose does not have a direct pre-query middleware for findByIdAndUpdate and findByIdAndDelete and we are using these method for updation and deletion. But they will still invoke this pre save query middleware hook if we use findOneAnd in regex.
 reviewSchema.pre(/^findOneAnd/, async function(next) {
   // Since in the query middleware we don't have the direct access to the document. But by executing the query the document gets returned before applying the query. So that way we can access the doc indirectly and  save this in r and later access it in the post query middleware. Reason is that in post the query gets executed and we've the updated data.
   this.r = await this.findOne();
