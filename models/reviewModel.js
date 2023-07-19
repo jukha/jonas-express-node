@@ -10,7 +10,9 @@ const reviewSchema = new mongoose.Schema(
     rating: {
       type: Number,
       min: 1,
-      max: 5
+      max: 5,
+      // Setter function: Run everytime this value changes
+      set: val => Math.round(val * 10) / 10
     },
     createdAt: {
       type: Date,
@@ -32,6 +34,9 @@ const reviewSchema = new mongoose.Schema(
     toObject: { virtuals: true }
   }
 );
+
+// Avoid duplicate review from same user for a tour via compound indexing
+reviewSchema.index({ tour: 1, user: 1 }, { unique: true });
 
 reviewSchema.pre(/^find/, function(next) {
   // this.populate({ path: 'tour', select: 'name' }).populate({
