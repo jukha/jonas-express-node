@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Tour = require('./tourModel');
 
 const reviewSchema = new mongoose.Schema(
   {
@@ -43,6 +44,50 @@ reviewSchema.pre(/^find/, function(next) {
     select: 'name photo'
   });
   next();
+});
+
+// calcAvgRatings is giong to be avaialable on the Review model
+reviewSchema.statics.calcAvgRatings = async function(tourId) {
+  // 'this' refers to the model (Review) and we can call aggregate on the model
+  const stats = await this.aggregate([
+    {
+      $match: { tour: tourId }
+    },
+    {
+      $group: {
+        _id: '$tour',
+        noOfRatings: { $sum: 1 },
+        avgRating: { $avg: '$rating' }
+      }
+    }
+  ]);
+  if (stats.length > 0) {
+    await Tour.findByIdAndUpdate(tourId, {
+      ratingsQuantity: stats[0].noOfRatings,
+      ratingsAverage: stats[0].avgRating
+    });
+  } else {
+    await Tour.findByIdAndUpdate(tourId, {
+      // If no reviews found for a tour set the default values
+      ratingsQuantity: 0,
+      ratingsAverage: 4.5
+    });
+  }
+};
+
+reviewSchema.post('save', function() {
+  // 'this.constructor' refers to the model that created that document
+  this.constructor.calcAvgRatings(this.tour);
+});
+
+reviewSchema.pre(/^findOneAnd/, async function(next) {
+  // Since in the query middleware we don't have the direct access to the document. But by executing the query the document gets returned before applying the query. So that way we can access the doc indirectly and  save this in r and later access it in the post query middleware. Reason is that in post the query gets executed and we've the updated data.
+  this.r = await this.findOne();
+  next();
+});
+
+reviewSchema.post(/^findOneAnd/, function() {
+  this.r.constructor.calcAvgRatings(this.r.tour);
 });
 
 const Review = mongoose.model('Review', reviewSchema);
