@@ -1,0 +1,22 @@
+/* eslint-disable */
+import axios from 'axios';
+import { showAlert } from './alert';
+
+export const updateData = async (name, email) => {
+  console.log('axios call');
+  try {
+    const res = await axios({
+      method: 'PATCH',
+      url: 'http://localhost:3000/api/v1/users/updateMe',
+      data: {
+        name,
+        email
+      }
+    });
+    if (res.data.status === 'success') {
+      showAlert('success', 'Data updated successfully!');
+    }
+  } catch (error) {
+    showAlert('error', error.response.message);
+  }
+};
