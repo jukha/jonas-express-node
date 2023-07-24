@@ -12,8 +12,15 @@ module.exports = class Email {
 
   newTransport() {
     if (process.env.NODE_ENV === 'production') {
-      // sendgrid
-      return 1;
+      // Brevo
+      return nodemailer.createTransport({
+        host: process.env.EMAIL_HOST_PROD,
+        port: process.env.EMAIL_PORT_PROD,
+        auth: {
+          user: process.env.EMAIL_USERNAME_PROD,
+          pass: process.env.EMAIL_PASSWORD_PROD
+        }
+      });
     }
     return nodemailer.createTransport({
       host: process.env.EMAIL_HOST,
