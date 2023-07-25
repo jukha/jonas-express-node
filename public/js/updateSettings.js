@@ -2,11 +2,10 @@
 import axios from 'axios';
 import { showAlert } from './alert';
 
-const BASE_URL = 'http://localhost:3000/api/v1';
+const BASE_URL = '/api/v1';
 
 // type is either 'password' or 'data'
 export const updateSettings = async (data, type) => {
-  console.log('axios call');
 
   try {
     const url =

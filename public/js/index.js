@@ -15,7 +15,6 @@ const bookTourBtn = document.getElementById('book-tour');
 
 // VALUES
 if (loginForm) {
-  console.log('yes login form is there');
   document.querySelector('.form').addEventListener('submit', e => {
     e.preventDefault();
     const email = document.getElementById('email').value;
@@ -53,7 +52,6 @@ if (userDataForm) {
     form.append('name', name);
     form.append('email', email);
     form.append('photo', photo);
-    console.log('form', form);
     updateSettings({ name, email }, 'data');
   });
 }
